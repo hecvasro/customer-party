@@ -43,11 +43,11 @@ public final class CustomerReader {
    * @throws NullPointerException
    *   If {@code reader} is {@code null}.
    */
-  public final List<Customer> read(BufferedReader reader) throws IOException {
-    ObjectUtil.checkNotNull(reader, "reader");
+  public final List<Customer> read(Reader reader) throws IOException {
+    final BufferedReader internalReader = new BufferedReader(ObjectUtil.checkNotNull(reader, "reader"));
     final List<Customer> customers = new ArrayList<>();
     String line;
-    while (!StringUtil.isNullOrEmpty(line = reader.readLine())) {
+    while (!StringUtil.isNullOrEmpty(line = internalReader.readLine())) {
       customers.add(this.gson.fromJson(line, Customer.class));
     }
     reader.close();

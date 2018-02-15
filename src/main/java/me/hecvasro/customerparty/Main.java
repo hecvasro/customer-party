@@ -3,7 +3,6 @@ package me.hecvasro.customerparty;
 import com.beust.jcommander.JCommander;
 import me.hecvasro.customerparty.util.ObjectUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
@@ -31,7 +30,7 @@ public final class Main {
       try {
         final CustomerReader customerReader = CustomerReader.create();
         final List<Customer> eligibleCustomers = CustomerParty.create(Office.HQ)
-          .findEligibleCustomers(customerReader.read(new BufferedReader(new FileReader(file))));
+          .findEligibleCustomers(customerReader.read(new FileReader(file)));
         System.out.println("Eligible customers");
         for (Customer customer : eligibleCustomers) {
           System.out.println(customer.toString());
