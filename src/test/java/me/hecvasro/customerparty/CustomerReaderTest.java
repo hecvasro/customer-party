@@ -3,7 +3,6 @@ package me.hecvasro.customerparty;
 import me.hecvasro.customerparty.util.Data;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -16,8 +15,8 @@ import static org.junit.Assert.assertEquals;
  */
 public final class CustomerReaderTest {
 
-  private static BufferedReader createReader(String s) {
-    return new BufferedReader(new StringReader(s));
+  private static StringReader createReader(String s) {
+    return new StringReader(s);
   }
 
   private final CustomerReader mapper;
