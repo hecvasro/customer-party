@@ -16,7 +16,7 @@ public final class CustomerPartyTest {
   private final CustomerParty customerParty;
 
   public CustomerPartyTest() {
-    this.customerParty = CustomerParty.create(Office.create(Coordinates.create(0, 0), 100));
+    this.customerParty = CustomerParty.create(Office.create(Coordinates.create(0, 0)));
   }
 
   @Test(expected = NullPointerException.class)

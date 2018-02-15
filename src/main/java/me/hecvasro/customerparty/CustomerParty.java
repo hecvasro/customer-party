@@ -6,14 +6,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Helper responsible of identifying and finding eligible {@link Customer customers} for the party.
+ * Helper responsible of identifying and finding eligible {@link Customer customers} a the party.
  *
  * @author hecvasro
  */
 public final class CustomerParty {
 
+  /**
+   * Default eligible range (in kilometers) for parties.
+   */
+  public static final double DEFAULT_ELIGIBLE_RANGE = 100.0;
+
+  static CustomerParty create(Office office, double eligibleRange) {
+    return new CustomerParty(office, eligibleRange);
+  }
+
   static CustomerParty create(Office office) {
-    return new CustomerParty(office);
+    return create(office, DEFAULT_ELIGIBLE_RANGE);
   }
 
   /**
@@ -21,8 +30,14 @@ public final class CustomerParty {
    */
   private final Office office;
 
-  private CustomerParty(Office office) {
+  /**
+   * Range (in kilometers) used to check if {@link Customer customers} are eligible for the party.
+   */
+  private final double eligibleRange;
+
+  private CustomerParty(Office office, double eligibleRange) {
     this.office = ObjectUtil.checkNotNull(office, "office");
+    this.eligibleRange = eligibleRange;
   }
 
   /**
@@ -37,7 +52,7 @@ public final class CustomerParty {
     ObjectUtil.checkNotNull(customer, "customer");
     final double distanceToOffice = this.office.coordinates()
       .calculateDistanceTo(customer.coordinates());
-    return Double.compare(distanceToOffice, this.office.eligibleRange()) <= 0;
+    return Double.compare(distanceToOffice, this.eligibleRange) <= 0;
   }
 
   /**

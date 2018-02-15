@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public final class OfficeTest {
 
   private static Office createOffice(double value) {
-    return Office.create(Coordinates.create(value, value), value);
+    return Office.create(Coordinates.create(value, value));
   }
 
   private final Office office;

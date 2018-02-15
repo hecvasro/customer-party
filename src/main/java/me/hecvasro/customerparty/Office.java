@@ -11,25 +11,19 @@ import java.util.Objects;
  */
 public final class Office {
 
-  public static Office create(Coordinates coordinates, double eligibleRange) {
-    return new Office(coordinates, eligibleRange);
+  public static Office create(Coordinates coordinates) {
+    return new Office(coordinates);
   }
 
-  public static final Office HQ = create(Coordinates.create(53.339428, -6.257664), 100);
+  public static final Office HQ = create(Coordinates.create(53.339428, -6.257664));
 
   /**
    * Office's coordinates.
    */
   private final Coordinates coordinates;
 
-  /**
-   * Office's eligible range (in kilometers).
-   */
-  private final double eligibleRange;
-
-  private Office(Coordinates coordinates, double eligibleRange) {
+  private Office(Coordinates coordinates) {
     this.coordinates = ObjectUtil.checkNotNull(coordinates, "coordinates");
-    this.eligibleRange = eligibleRange;
   }
 
   /**
@@ -37,13 +31,6 @@ public final class Office {
    */
   public final Coordinates coordinates() {
     return this.coordinates;
-  }
-
-  /**
-   * Office's eligible range (in kilometers).
-   */
-  public final double eligibleRange() {
-    return this.eligibleRange;
   }
 
   @Override
@@ -58,12 +45,11 @@ public final class Office {
       return false;
     }
     final Office that = (Office) object;
-    return this.coordinates.equals(that.coordinates)
-      && Double.compare(this.eligibleRange, that.eligibleRange) == 0;
+    return this.coordinates.equals(that.coordinates);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.coordinates, this.eligibleRange);
+    return Objects.hash(this.coordinates);
   }
 }
